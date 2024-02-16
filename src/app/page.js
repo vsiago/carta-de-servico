@@ -82,8 +82,11 @@ export default function Carta() {
               </div>
             </div>
           </nav>
+
+          {/* SUBMENUS CARTAS */}
           {secretariaSelecionada && (
             <ul className='flex gap-2 mt-3'>
+              <p className='p-1 px-3 bg-slate-600 text-white rounded-full cursor-pointer'>Todos de {secretariaSelecionada.nome}</p>
               {secretariaSelecionada.cartas.map((carta, index) => (
                 <li key={index}>
                     <p className='p-1 px-3 bg-slate-300 rounded-full cursor-pointer'>{carta.cartaNome}</p>
@@ -91,6 +94,8 @@ export default function Carta() {
               ))}
             </ul>
           )}
+
+          {/* CARTAS LISTAS */}
           {
             secretariasData.secretarias.map((secretaria, indexSecretaria) => (
               <ul className='flex flex-col gap-2 mt-5'>
