@@ -44,11 +44,11 @@ const secretarias = [
 
 function ListaSecretarias({ state }) {
   return (
-    <ul className={`${state ? 'visible opacity-100 h-[500px] top-20 overflow-auto' : 'invisible opacity-0 top-14 h-0'} ${state && ''}md:flex-row md:h-auto md:top-0 overflow-hidden trasnition-all ease-in-out duration-300 h-16 flex flex-col gap-1 items-end ml-20 absolute right-0 `}>
+    <ul className={`${state ? 'visible opacity-100 h-[500px] top-20 overflow-auto' : 'invisible opacity-0 top-14 h-0 md:visible md:opacity-100 md:h-auto'} md:flex-row md:h-auto md:top-0 overflow-hidden trasnition-all ease-in-out duration-300 h-16 flex flex-col gap-1 items-end ml-20 absolute right-0`}>
 
-    {/* LISTA DE SECRETARIAS */}
-    {secretarias.map((secretaria, index) => (
-          <li className={`px-4 bg-[#285497] min-w-[56px] min-h-[56px] flex flex-row-reverse items-center justify-center rounded-lg shadow gap-3`}>
+      {/* LISTA DE SECRETARIAS */}
+      {secretarias.map((secretaria, index) => (
+        <li key={index} className={`px-4 bg-[#285497] min-w-[56px] min-h-[56px] flex flex-row-reverse items-center justify-center rounded-lg shadow gap-3`}>
           <div className="min-w-[32px] min-h-[32px] p-[2px] bg-[#5792EB] rounded-lg">
             <Image
               width={32}
@@ -59,10 +59,10 @@ function ListaSecretarias({ state }) {
           </div>
           <p className="font-bold text-white">{secretaria.nome}</p>
         </li>
-    ))
+      ))
 
-    }
-  </ul>
+      }
+    </ul>
   )
 }
 
@@ -113,15 +113,15 @@ export default function Carta() {
                 alt="Icone Carta de Servico"
               />
             </div>
-              <ListaSecretarias state={state}/>
+            <ListaSecretarias state={state} />
             <div>
-            <div
-            onClick={() => setState(!state)}
-            className="p-4 py-[18px] bg-sky-500 min-w-[56px] h-[56px] flex flex-col  justify-between rounded-lg md:hidden cursor-pointer">
-              <div className="w-full h-[3px] bg-white"></div>
-              <div className="w-full h-[3px] bg-white"></div>
-              <div className="w-full h-[3px] bg-white"></div>
-            </div>
+              <div
+                onClick={() => setState(!state)}
+                className="p-4 py-[18px] bg-sky-500 min-w-[56px] h-[56px] flex flex-col  justify-between rounded-lg md:hidden cursor-pointer">
+                <div className="w-full h-[3px] bg-white"></div>
+                <div className="w-full h-[3px] bg-white"></div>
+                <div className="w-full h-[3px] bg-white"></div>
+              </div>
             </div>
           </nav>
         </section>
