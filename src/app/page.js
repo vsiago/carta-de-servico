@@ -30,7 +30,7 @@ export default function Carta() {
   const [secretarias, setSecretarias] = useState([]);
   const [secretariaSelecionada, setSecretariaSelecionada] = useState(null);
 
-  const handleSecretariaClick = (secretaria) => {
+  const handleSecretariaClick = (secretaria = null) => {
     setSecretariaSelecionada(secretaria);
     setState(false);
   };
@@ -42,7 +42,7 @@ export default function Carta() {
   return (
     <>
       <header className="min-h-40 bg-[#003E75] px-6 flex flex-col justify-end py-6">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center container mx-auto">
           <Image
             width={42}
             height={42}
@@ -56,11 +56,13 @@ export default function Carta() {
             alt="Logo de Itaguai"
           />
         </div>
+        <div className='container mx-auto'>
         <p className="text-2xl font-medium text-white pt-6">Carta de Serviço</p>
         <p className="text-base text-[#6BC1FF] font-medium">Um compromisso com o cidadão.</p>
+        </div>
       </header>
-      <main className="min-h-screen flex-1 bg-[#E3E6EE] p-6">
-        <section>
+      <main className="min-h-screen flex-1 bg-[#E3E6EE] p-6 ">
+        <section className='container mx-auto'>
           <nav className="flex gap-3 items-center justify-between min-w-screen  relative">
             {/* Botao Buscar todas as Buscas */}
             <div onClick={() => setSecretariaSelecionada(null)} className="p-2 bg-[#233550] min-w-[56px] h-[56px] flex items-center justify-center rounded-lg cursor-pointer">
@@ -96,20 +98,29 @@ export default function Carta() {
           )}
 
           {/* CARTAS LISTAS */}
-          {
-            secretariasData.secretarias.map((secretaria, indexSecretaria) => (
-              <ul className='flex flex-col gap-2 mt-5'>
-                <p>Secretaria: {secretaria.nome}</p>
-              <React.Fragment key={indexSecretaria}>
-                {secretaria.cartas.map((carta, indexCarta) => (
-                  <li className='list-none w-full bg-white p-5 rounded-lg' key={indexCarta}>
-                    <p>{carta.cartaNome}</p>
-                  </li>
-                ))}
-              </React.Fragment>
-              </ul>
-            ))
-          }
+{
+  secretariaSelecionada === null ? (
+    secretariasData.secretarias.map((secretaria, indexSecretaria) => (
+      <ul className='flex flex-col gap-2 mt-5'>
+        <p>Secretaria: {secretaria.nome}</p>
+        {secretaria.cartas.map((carta, indexCarta) => (
+          <li className='list-none w-full bg-white p-5 rounded-lg' key={indexCarta}>
+            <p>{carta.cartaNome}</p>
+          </li>
+        ))}
+      </ul>
+    ))
+  ) : (
+    <ul className='flex flex-col gap-2 mt-5'>
+      <p>Secretaria: {secretariaSelecionada.nome}</p>
+      {secretariaSelecionada.cartas.map((carta, indexCarta) => (
+        <li className='list-none w-full bg-white p-5 rounded-lg' key={indexCarta}>
+          <p>{carta.cartaNome}</p>
+        </li>
+      ))}
+    </ul>
+  )
+}
         </section>
       </main>
     </>
