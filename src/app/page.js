@@ -57,8 +57,8 @@ export default function Carta() {
           />
         </div>
         <div className='container mx-auto'>
-        <p className="text-2xl font-medium text-white pt-6">Carta de Serviço</p>
-        <p className="text-base text-[#6BC1FF] font-medium">Um compromisso com o cidadão.</p>
+          <p className="text-2xl font-medium text-white pt-6">Carta de Serviço</p>
+          <p className="text-base text-[#6BC1FF] font-medium">Um compromisso com o cidadão.</p>
         </div>
       </header>
       <main className="min-h-screen flex-1 bg-[#E3E6EE] p-6 ">
@@ -91,36 +91,36 @@ export default function Carta() {
               <p className='p-1 px-3 bg-slate-600 text-white rounded-full cursor-pointer'>Todos de {secretariaSelecionada.nome}</p>
               {secretariaSelecionada.cartas.map((carta, index) => (
                 <li key={index}>
-                    <p className='p-1 px-3 bg-slate-300 rounded-full cursor-pointer'>{carta.cartaNome}</p>
+                  <p className='p-1 px-3 bg-slate-300 rounded-full cursor-pointer'>{carta.cartaNome}</p>
                 </li>
               ))}
             </ul>
           )}
 
           {/* CARTAS LISTAS */}
-{
-  secretariaSelecionada === null ? (
-    secretariasData.secretarias.map((secretaria, indexSecretaria) => (
-      <ul className='flex flex-col gap-2 mt-5'>
-        <p>Secretaria: {secretaria.nome}</p>
-        {secretaria.cartas.map((carta, indexCarta) => (
-          <li className='list-none w-full bg-white p-5 rounded-lg' key={indexCarta}>
-            <p>{carta.cartaNome}</p>
-          </li>
-        ))}
-      </ul>
-    ))
-  ) : (
-    <ul className='flex flex-col gap-2 mt-5'>
-      <p>Secretaria: {secretariaSelecionada.nome}</p>
-      {secretariaSelecionada.cartas.map((carta, indexCarta) => (
-        <li className='list-none w-full bg-white p-5 rounded-lg' key={indexCarta}>
-          <p>{carta.cartaNome}</p>
-        </li>
-      ))}
-    </ul>
-  )
-}
+          {
+            secretariaSelecionada === null ? (
+              secretariasData.secretarias.map((secretaria, indexSecretaria) => (
+                <ul key={indexSecretaria} className='flex flex-col gap-2 mt-5'>
+                  <p>Secretaria: {secretaria.nome}</p>
+                  {secretaria.cartas.map((carta, indexCarta) => (
+                    <li className='list-none w-full bg-white p-5 rounded-lg' key={indexCarta}>
+                      <p>{carta.cartaNome}</p>
+                    </li>
+                  ))}
+                </ul>
+              ))
+            ) : (
+              <ul className='flex flex-col gap-2 mt-5'>
+                <p>Secretaria: {secretariaSelecionada.nome}</p>
+                {secretariaSelecionada.cartas.map((carta, indexCarta) => (
+                  <li className='list-none w-full bg-white p-5 rounded-lg' key={indexCarta}>
+                    <p>{carta.cartaNome}</p>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
         </section>
       </main>
     </>
