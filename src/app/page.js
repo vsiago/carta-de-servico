@@ -44,7 +44,7 @@ const secretarias = [
 
 function ListaSecretarias({ state }) {
   return (
-    <ul className={`${state ? 'visible opacity-100 h-[500px] top-20 overflow-auto' : 'invisible opacity-0 top-14 h-0'} overflow-hidden trasnition-all ease-in-out duration-300 h-16 flex flex-col gap-1 items-end ml-20 absolute right-0 `}>
+    <ul className={`${state ? 'visible opacity-100 h-[500px] top-20 overflow-auto' : 'invisible opacity-0 top-14 h-0'} ${state && ''}md:flex-row md:h-auto md:top-0 overflow-hidden trasnition-all ease-in-out duration-300 h-16 flex flex-col gap-1 items-end ml-20 absolute right-0 `}>
 
     {/* LISTA DE SECRETARIAS */}
     {secretarias.map((secretaria, index) => (
