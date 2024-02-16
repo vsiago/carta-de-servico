@@ -87,14 +87,16 @@ export default function Carta() {
 
           {/* SUBMENUS CARTAS */}
           {secretariaSelecionada && (
-            <ul className='flex gap-2 mt-3'>
-              <p className='p-1 px-3 bg-slate-600 text-white rounded-full cursor-pointer'>Todos de {secretariaSelecionada.nome}</p>
-              {secretariaSelecionada.cartas.map((carta, index) => (
-                <li key={index}>
-                  <p className='p-1 px-3 bg-slate-300 rounded-full cursor-pointer'>{carta.cartaNome}</p>
-                </li>
-              ))}
-            </ul>
+            <div className='overflow-x-auto'>
+              <ul className='flex gap-2 mt-3 z-[1000] whitespace-nowrap h-16 items-center'>
+                <p className='p-1 px-3 bg-slate-600 text-white rounded-full cursor-pointer h-8'>Todos de {secretariaSelecionada.nome}</p>
+                {secretariaSelecionada.cartas.map((carta, index) => (
+                  <li key={index}>
+                    <p className='p-1 px-3 bg-slate-300 rounded-full cursor-pointer h-8'>{carta.cartaNome}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
 
           {/* CARTAS LISTAS */}
