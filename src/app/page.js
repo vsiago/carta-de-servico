@@ -34,6 +34,13 @@ export default function Carta() {
   const [secretarias, setSecretarias] = useState([])
   const [allCartas, setAllCartas] = useState(false)
 
+  const handleClick = () => {
+    console.log('Estaca zero');
+    // Atualize a lista de secretarias
+    // Por enquanto, vamos apenas exibir os dados originais
+    setSecretarias(secretariasData.secretarias);
+  };
+
   useEffect(() => {
     setSecretarias(secretariasData.secretarias);
   })
@@ -61,8 +68,10 @@ export default function Carta() {
       <main className="min-h-screen flex-1 bg-[#E3E6EE] p-6">
         <section>
           <nav className="flex gap-3 items-center justify-between min-w-screen  relative">
+
+
             {/* Botao Buscar todas as Buscas */}
-            <div onClick={() => setAllCartas(true)} className="p-2 bg-[#233550] min-w-[56px] h-[56px] flex items-center justify-center rounded-lg cursor-pointer">
+            <div onClick={handleClick} className="p-2 bg-[#233550] min-w-[56px] h-[56px] flex items-center justify-center rounded-lg cursor-pointer">
               <Image
                 width={32}
                 height={32}
@@ -73,7 +82,7 @@ export default function Carta() {
             <ListaSecretarias state={state} />
             <div>
               <div
-                onClick={() => console.log('Estaca zero')}
+                onClick={() => setState(!state)}
                 className="p-4 py-[18px] bg-sky-500 min-w-[56px] h-[56px] flex flex-col  justify-between rounded-lg md:hidden cursor-pointer">
                 <div className="w-full h-[3px] bg-white"></div>
                 <div className="w-full h-[3px] bg-white"></div>
