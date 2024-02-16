@@ -1,4 +1,5 @@
 "use client"
+import React from 'react';
 import Image from "next/image"
 import { useState, useEffect } from "react"
 
@@ -31,6 +32,7 @@ function ListaSecretarias({ state }) {
 export default function Carta() {
   const [state, setState] = useState(false)
   const [secretarias, setSecretarias] = useState([])
+  const [allCartas, setAllCartas] = useState(false)
 
   useEffect(() => {
     setSecretarias(secretariasData.secretarias);
@@ -60,7 +62,7 @@ export default function Carta() {
         <section>
           <nav className="flex gap-3 items-center justify-between min-w-screen  relative">
             {/* Botao Buscar todas as Buscas */}
-            <div onClick={() => console.log('Carregar Todas as Cartas')} className="p-2 bg-[#233550] min-w-[56px] h-[56px] flex items-center justify-center rounded-lg cursor-pointer">
+            <div onClick={() => setAllCartas(true)} className="p-2 bg-[#233550] min-w-[56px] h-[56px] flex items-center justify-center rounded-lg cursor-pointer">
               <Image
                 width={32}
                 height={32}
@@ -71,7 +73,7 @@ export default function Carta() {
             <ListaSecretarias state={state} />
             <div>
               <div
-                onClick={() => setState(!state)}
+                onClick={() => console.log('Estaca zero')}
                 className="p-4 py-[18px] bg-sky-500 min-w-[56px] h-[56px] flex flex-col  justify-between rounded-lg md:hidden cursor-pointer">
                 <div className="w-full h-[3px] bg-white"></div>
                 <div className="w-full h-[3px] bg-white"></div>
@@ -81,11 +83,13 @@ export default function Carta() {
           </nav>
           <ul>
             {secretariasData.secretarias.map((secretaria, indexSecretaria) => (
-              <li key={indexSecretaria}>
+              <React.Fragment key={indexSecretaria}>
                 {secretaria.cartas.map((carta, indexCarta) => (
-                  <h1>{carta.cartaNome}</h1>
+                  <li key={indexCarta}>
+                    <p>{carta.cartaNome}</p>
+                  </li>
                 ))}
-              </li>
+              </React.Fragment>
             ))}
           </ul>
         </section>
