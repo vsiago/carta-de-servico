@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from "next/image"
 import secretariasData from '../../public/secretarias.json'
+import Submenus from '@/components/Submenus';
 
 function ListaSecretarias({ state, handleSecretariaClick }) {
   return (
@@ -79,6 +80,8 @@ export default function Carta() {
       <main className="min-h-screen flex-1 bg-[#E3E6EE] p-6 ">
         <section className='container mx-auto'>
           <nav className="flex gap-3 items-center justify-between min-w-screen  relative">
+
+
             {/* Botao Buscar todas as Buscas */}
             <div onClick={() => setSecretariaSelecionada(null)} className="p-2 bg-[#233550] min-w-[56px] h-[56px] flex items-center justify-center rounded-lg cursor-pointer">
               <Image
@@ -102,28 +105,24 @@ export default function Carta() {
 
           {/* RENDERIZA SUBMENUS PARA BUSCAR TODOS OS SERVICOS */}
           {secretariaSelecionada && (
-            <div className='overflow-x-auto'>
-              <ul className='flex gap-2 mt-3 z-[1000] whitespace-nowrap h-16 items-center'>
-                <p className={`p-1 px-3 rounded-full cursor-pointer h-8 ${!cartaSelecionada ? 'bg-slate-600 text-white' : 'bg-slate-300 text-black'}`} onClick={() => handleCartaClick(null)}>Todos de {secretariaSelecionada.nome}</p>
-                {servicos.map((servico, index) => (
-                  <li onClick={() => handleCartaClick(servico)} key={index}>
-                    <p className={`p-1 px-3 rounded-full cursor-pointer h-8 ${cartaSelecionada === servico ? 'bg-slate-600 text-white' : 'bg-slate-300 text-black'}`}>{servico.nome}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <Submenus
+              servicos={servicos}
+              cartaSelecionada={cartaSelecionada}
+              handleCartaClick={handleCartaClick}
+            />
           )}
 
           {/* CARTAS DOS SERVICOS */}
           {
+
             (() => {
               if (secretariaSelecionada === null) {
                 // Se uma das condições for verdadeira, renderiza a lista de todas as secretarias
                 return secretariasData.secretarias.map((secretaria, indexSecretaria) => (
                   <React.Fragment key={indexSecretaria}>
-                    <p className='mt-6 uppercase text-sm font-semibold tracking-wide'>{secretaria.nome}</p>
+                    <p className='mb-4 mt-8 uppercase text-sm font-semibold tracking-wide'>{secretaria.nome}</p>
                     {secretaria.servicos.map((servico, indexServico) => (
-                      <ul className='flex flex-col gap-2 mt-5' key={indexServico}>
+                      <ul className='flex flex-col gap-2 mt-2' key={indexServico}>
                         {servico.cartas.map((carta, indexCarta) => (
                           <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
                             {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
