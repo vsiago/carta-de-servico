@@ -103,46 +103,45 @@ export default function Carta() {
           {
             secretariaSelecionada === null ? (
               secretariasData.secretarias.map((secretaria, indexSecretaria) => (
-                <ul key={indexSecretaria} className='flex flex-col gap-2 mt-5'>
-                  <p>Secretaria: {secretaria.nome}</p>
+                <React.Fragment key={indexSecretaria} className='flex flex-col gap-2 mt-5'>
+                  <p className='mt-8'>Secretaria: {secretaria.nome}</p>
                   {secretaria.servicos.map((servico, indexServico) => (
-                    <li className='list-none w-full bg-white p-5 rounded-lg' key={indexServico}>
-                      <p>{servico.nome}</p>
-                      <ul className="flex flex-col gap-2 mt-2">
-                        {servico.cartas.map((carta, indexCarta) => (
-                          <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
-                            <p>{carta.titulo}</p>
-                            <p>{carta.descricao}</p>
-                            <img src={carta.avatar} alt="Avatar" className="w-10 h-10" />
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ))}
-                </ul>
-              ))
-            ) : (
-              <ul className='flex flex-col gap-2 mt-5'>
-                <p>Secretaria: {secretariaSelecionada.nome}</p>
-                {secretariaSelecionada.servicos.map((servico, indexServico) => (
-                  <li className='list-none w-full bg-white p-5 rounded-lg' key={indexServico}>
-                    <p>{servico.nome}</p>
-                    <ul className="flex flex-col gap-2 mt-2">
+                    <ul className='flex flex-col gap-2 mt-2' key={indexServico}>
                       {servico.cartas.map((carta, indexCarta) => (
                         <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
-                          <p>{carta.titulo}</p>
-                          <p>{carta.descricao}</p>
                           <img src={carta.avatar} alt="Avatar" className="w-10 h-10" />
+                          <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
+                          <p className='font-bold'>{carta.titulo}</p>
+                          <p>{carta.descricao}</p>
                         </li>
                       ))}
                     </ul>
-                  </li>
-                ))}
-              </ul>
-            )
+                  ))}
+                </React.Fragment>
+              ))
+            ) :
+              (
+                <>
+                  <p>Secretaria: {secretariaSelecionada.nome}</p>
+                  <ul className='flex flex-col gap-2 mt-5'>
+                    {secretariaSelecionada.servicos.map((servico, indexServico) => (
+                      <>
+                        <ul className='list-none w-full flex flex-col gap-2  rounded-lg' key={indexServico}>
+                          {servico.cartas.map((carta, indexCarta) => (
+                            <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
+                              <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
+                              <p>{carta.titulo}</p>
+                              <p>{carta.descricao}</p>
+                              <img src={carta.avatar} alt="Avatar" className="w-10 h-10" />
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ))}
+                  </ul>
+                </>
+              )
           }
-
-
         </section>
       </main>
     </>
