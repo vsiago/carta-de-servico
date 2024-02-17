@@ -129,10 +129,10 @@ export default function Carta() {
                         <ul className='list-none w-full flex flex-col gap-2  rounded-lg' key={indexServico}>
                           {servico.cartas.map((carta, indexCarta) => (
                             <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
+                              <img src={carta.avatar} alt="Avatar" className="w-10 h-10" />
                               <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
                               <p>{carta.titulo}</p>
                               <p>{carta.descricao}</p>
-                              <img src={carta.avatar} alt="Avatar" className="w-10 h-10" />
                             </li>
                           ))}
                         </ul>
