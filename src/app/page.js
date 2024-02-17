@@ -117,7 +117,7 @@ export default function Carta() {
           {/* CARTAS DOS SERVICOS */}
           {
             (() => {
-              if (secretariaSelecionada === null || cartaSelecionada === null) {
+              if (secretariaSelecionada === null) {
                 // Se uma das condições for verdadeira, renderiza a lista de todas as secretarias
                 return secretariasData.secretarias.map((secretaria, indexSecretaria) => (
                   <React.Fragment key={indexSecretaria}>
@@ -158,7 +158,7 @@ export default function Carta() {
                 // Caso contrário, renderiza apenas a secretariaSelecionada
                 return (
                   <>
-                    <p>Secretaria: {secretariaSelecionada.nome}</p>
+                    <p className='mt-6 uppercase text-sm font-semibold tracking-wide'>{secretariaSelecionada.nome}</p>
                     <ul className='flex flex-col gap-2 mt-5'>
                       {secretariaSelecionada.servicos.map((servico, indexServico) => (
                         <ul key={indexServico} className='list-none w-full flex flex-col gap-2  rounded-lg'>
