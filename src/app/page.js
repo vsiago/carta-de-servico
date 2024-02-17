@@ -99,7 +99,7 @@ export default function Carta() {
             </div>
           )}
 
-          {/* SERVICO LISTAS */}
+          {/* CARTAS DOS LISTAS */}
           {
             secretariaSelecionada === null ? (
               secretariasData.secretarias.map((secretaria, indexSecretaria) => (
@@ -108,6 +108,15 @@ export default function Carta() {
                   {secretaria.servicos.map((servico, indexServico) => (
                     <li className='list-none w-full bg-white p-5 rounded-lg' key={indexServico}>
                       <p>{servico.nome}</p>
+                      <ul className="flex flex-col gap-2 mt-2">
+                        {servico.cartas.map((carta, indexCarta) => (
+                          <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
+                            <p>{carta.titulo}</p>
+                            <p>{carta.descricao}</p>
+                            <img src={carta.avatar} alt="Avatar" className="w-10 h-10" />
+                          </li>
+                        ))}
+                      </ul>
                     </li>
                   ))}
                 </ul>
@@ -118,11 +127,21 @@ export default function Carta() {
                 {secretariaSelecionada.servicos.map((servico, indexServico) => (
                   <li className='list-none w-full bg-white p-5 rounded-lg' key={indexServico}>
                     <p>{servico.nome}</p>
+                    <ul className="flex flex-col gap-2 mt-2">
+                      {servico.cartas.map((carta, indexCarta) => (
+                        <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
+                          <p>{carta.titulo}</p>
+                          <p>{carta.descricao}</p>
+                          <img src={carta.avatar} alt="Avatar" className="w-10 h-10" />
+                        </li>
+                      ))}
+                    </ul>
                   </li>
                 ))}
               </ul>
             )
           }
+
 
         </section>
       </main>
