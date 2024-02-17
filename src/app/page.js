@@ -123,7 +123,7 @@ export default function Carta() {
                   <React.Fragment key={indexSecretaria}>
                     <p className='mt-6 uppercase text-sm font-semibold tracking-wide'>{secretaria.nome}</p>
                     {secretaria.servicos.map((servico, indexServico) => (
-                      <ul className='flex flex-col gap-2 mt-2' key={indexServico}>
+                      <ul className='flex flex-col gap-2 mt-5' key={indexServico}>
                         {servico.cartas.map((carta, indexCarta) => (
                           <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
                             {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
@@ -140,7 +140,7 @@ export default function Carta() {
                 // Se cartaSelecionada não for nula, renderiza os itens do submenu
                 return (
                   <>
-                    <p>{cartaSelecionada.nome}</p>
+                    <p className='mt-6 uppercase text-sm font-semibold tracking-wide'>{cartaSelecionada.nome}</p>
                     <ul className='flex flex-col gap-2 mt-5'>
                       {cartaSelecionada.cartas.map((carta, indexCarta) => (
                         <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
