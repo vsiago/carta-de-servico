@@ -85,29 +85,29 @@ export default function Carta() {
             </div>
           </nav>
 
-          {/* SUBMENUS CARTAS */}
+          {/* SUBMENUS PARA BUSCAR TODOS OS SERVICOS */}
           {secretariaSelecionada && (
             <div className='overflow-x-auto'>
               <ul className='flex gap-2 mt-3 z-[1000] whitespace-nowrap h-16 items-center'>
                 <p className='p-1 px-3 bg-slate-600 text-white rounded-full cursor-pointer h-8'>Todos de {secretariaSelecionada.nome}</p>
-                {secretariaSelecionada.cartas.map((carta, index) => (
+                {secretariaSelecionada.servicos.map((carta, index) => (
                   <li key={index}>
-                    <p className='p-1 px-3 bg-slate-300 rounded-full cursor-pointer h-8'>{carta.cartaNome}</p>
+                    <p className='p-1 px-3 bg-slate-300 rounded-full cursor-pointer h-8'>{carta.nome}</p>
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          {/* CARTAS LISTAS */}
+          {/* SERVICO LISTAS */}
           {
             secretariaSelecionada === null ? (
               secretariasData.secretarias.map((secretaria, indexSecretaria) => (
                 <ul key={indexSecretaria} className='flex flex-col gap-2 mt-5'>
                   <p>Secretaria: {secretaria.nome}</p>
-                  {secretaria.cartas.map((carta, indexCarta) => (
-                    <li className='list-none w-full bg-white p-5 rounded-lg' key={indexCarta}>
-                      <p>{carta.cartaNome}</p>
+                  {secretaria.servicos.map((servico, indexServico) => (
+                    <li className='list-none w-full bg-white p-5 rounded-lg' key={indexServico}>
+                      <p>{servico.nome}</p>
                     </li>
                   ))}
                 </ul>
@@ -115,14 +115,15 @@ export default function Carta() {
             ) : (
               <ul className='flex flex-col gap-2 mt-5'>
                 <p>Secretaria: {secretariaSelecionada.nome}</p>
-                {secretariaSelecionada.cartas.map((carta, indexCarta) => (
-                  <li className='list-none w-full bg-white p-5 rounded-lg' key={indexCarta}>
-                    <p>{carta.cartaNome}</p>
+                {secretariaSelecionada.servicos.map((servico, indexServico) => (
+                  <li className='list-none w-full bg-white p-5 rounded-lg' key={indexServico}>
+                    <p>{servico.nome}</p>
                   </li>
                 ))}
               </ul>
             )
           }
+
         </section>
       </main>
     </>
