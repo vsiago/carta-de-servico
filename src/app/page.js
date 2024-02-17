@@ -29,24 +29,30 @@ export default function Carta() {
   const [state, setState] = useState(false);
   const [secretarias, setSecretarias] = useState([]);
   const [secretariaSelecionada, setSecretariaSelecionada] = useState(null);
-  const [cartaSelecionada, setCartaSelecionada] = useState(null)
+  const [cartaSelecionada, setCartaSelecionada] = useState(null);
+  const [servicos, setServicos] = useState([]);
 
   // Seleciona secretaria especifica
   const handleSecretariaClick = (secretaria = null) => {
     setSecretariaSelecionada(secretaria);
-    setState(false);
+    setCartaSelecionada(null);
   };
 
   // Seleciona a carta especifica
   const handleCartaClick = (carta = null) => {
-    // console.log(carta)
     setCartaSelecionada(carta);
-    setState(false)
-  }
+  };
 
   useEffect(() => {
     setSecretarias(secretariasData.secretarias);
   }, []); // executa apenas uma vez ao montar o componente
+
+  useEffect(() => {
+    if (secretariaSelecionada) {
+      setServicos(secretariaSelecionada.servicos);
+      setState(false)
+    }
+  }, [secretariaSelecionada]);
 
   return (
     <>
@@ -94,15 +100,14 @@ export default function Carta() {
             </div>
           </nav>
 
-          {/* SUBMENUS PARA BUSCAR TODOS OS SERVICOS */}
+          {/* RENDERIZA SUBMENUS PARA BUSCAR TODOS OS SERVICOS */}
           {secretariaSelecionada && (
             <div className='overflow-x-auto'>
               <ul className='flex gap-2 mt-3 z-[1000] whitespace-nowrap h-16 items-center'>
-                <p className='p-1 px-3 bg-slate-600 text-white rounded-full cursor-pointer h-8'>Todos de {secretariaSelecionada.nome}</p>
-                {secretariaSelecionada.servicos.map((carta, index) => (
-                  // Criar logica aqui
-                  <li onClick={() => handleCartaClick(carta)} key={index}>
-                    <p className='p-1 px-3 bg-slate-300 rounded-full cursor-pointer h-8'>{carta.nome}</p>
+                <p className={`p-1 px-3 rounded-full cursor-pointer h-8 ${!cartaSelecionada ? 'bg-slate-600 text-white' : 'bg-slate-300 text-black'}`} onClick={() => handleCartaClick(null)}>Todos de {secretariaSelecionada.nome}</p>
+                {servicos.map((servico, index) => (
+                  <li onClick={() => handleCartaClick(servico)} key={index}>
+                    <p className={`p-1 px-3 rounded-full cursor-pointer h-8 ${cartaSelecionada === servico ? 'bg-slate-600 text-white' : 'bg-slate-300 text-black'}`}>{servico.nome}</p>
                   </li>
                 ))}
               </ul>
@@ -116,7 +121,7 @@ export default function Carta() {
                 // Se uma das condições for verdadeira, renderiza a lista de todas as secretarias
                 return secretariasData.secretarias.map((secretaria, indexSecretaria) => (
                   <React.Fragment key={indexSecretaria}>
-                    <p className='mt-8'>Secretaria: {secretaria.nome}</p>
+                    <p className='mt-6 uppercase text-sm font-semibold tracking-wide'>{secretaria.nome}</p>
                     {secretaria.servicos.map((servico, indexServico) => (
                       <ul className='flex flex-col gap-2 mt-2' key={indexServico}>
                         {servico.cartas.map((carta, indexCarta) => (
@@ -135,12 +140,8 @@ export default function Carta() {
                 // Se cartaSelecionada não for nula, renderiza os itens do submenu
                 return (
                   <>
-                    {/* Aqui você renderiza os itens do submenu */}
-                    {/* Exemplo: */}
                     <p>{cartaSelecionada.nome}</p>
                     <ul className='flex flex-col gap-2 mt-5'>
-                      {/* Renderize os itens do submenu aqui */}
-                      {/* Exemplo: */}
                       {cartaSelecionada.cartas.map((carta, indexCarta) => (
                         <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
                           {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
