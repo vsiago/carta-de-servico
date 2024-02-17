@@ -29,11 +29,20 @@ export default function Carta() {
   const [state, setState] = useState(false);
   const [secretarias, setSecretarias] = useState([]);
   const [secretariaSelecionada, setSecretariaSelecionada] = useState(null);
+  const [cartaSelecionada, setCartaSelecionada] = useState(null)
 
+  // Seleciona secretaria especifica
   const handleSecretariaClick = (secretaria = null) => {
     setSecretariaSelecionada(secretaria);
     setState(false);
   };
+
+  // Seleciona a carta especifica
+  const handleCartaClick = (carta = null) => {
+    // console.log(carta)
+    setCartaSelecionada(carta);
+    setState(false)
+  }
 
   useEffect(() => {
     setSecretarias(secretariasData.secretarias);
@@ -91,7 +100,8 @@ export default function Carta() {
               <ul className='flex gap-2 mt-3 z-[1000] whitespace-nowrap h-16 items-center'>
                 <p className='p-1 px-3 bg-slate-600 text-white rounded-full cursor-pointer h-8'>Todos de {secretariaSelecionada.nome}</p>
                 {secretariaSelecionada.servicos.map((carta, index) => (
-                  <li key={index}>
+                  // Criar logica aqui
+                  <li onClick={() => handleCartaClick(carta)} key={index}>
                     <p className='p-1 px-3 bg-slate-300 rounded-full cursor-pointer h-8'>{carta.nome}</p>
                   </li>
                 ))}
@@ -99,49 +109,75 @@ export default function Carta() {
             </div>
           )}
 
-          {/* CARTAS DOS LISTAS */}
+          {/* CARTAS DOS SERVICOS */}
           {
-            secretariaSelecionada === null ? (
-              secretariasData.secretarias.map((secretaria, indexSecretaria) => (
-                <React.Fragment key={indexSecretaria} className='flex flex-col gap-2 mt-5'>
-                  <p className='mt-8'>Secretaria: {secretaria.nome}</p>
-                  {secretaria.servicos.map((servico, indexServico) => (
-                    <ul className='flex flex-col gap-2 mt-2' key={indexServico}>
-                      {servico.cartas.map((carta, indexCarta) => (
+            (() => {
+              if (secretariaSelecionada === null || cartaSelecionada === null) {
+                // Se uma das condições for verdadeira, renderiza a lista de todas as secretarias
+                return secretariasData.secretarias.map((secretaria, indexSecretaria) => (
+                  <React.Fragment key={indexSecretaria}>
+                    <p className='mt-8'>Secretaria: {secretaria.nome}</p>
+                    {secretaria.servicos.map((servico, indexServico) => (
+                      <ul className='flex flex-col gap-2 mt-2' key={indexServico}>
+                        {servico.cartas.map((carta, indexCarta) => (
+                          <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
+                            {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
+                            <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
+                            <p className='font-bold'>{carta.titulo}</p>
+                            <p>{carta.descricao}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    ))}
+                  </React.Fragment>
+                ));
+              } else if (cartaSelecionada !== null) {
+                // Se cartaSelecionada não for nula, renderiza os itens do submenu
+                return (
+                  <>
+                    {/* Aqui você renderiza os itens do submenu */}
+                    {/* Exemplo: */}
+                    <p>{cartaSelecionada.nome}</p>
+                    <ul className='flex flex-col gap-2 mt-5'>
+                      {/* Renderize os itens do submenu aqui */}
+                      {/* Exemplo: */}
+                      {cartaSelecionada.cartas.map((carta, indexCarta) => (
                         <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
-                          <img src={carta.avatar} alt="Avatar" className="w-10 h-10" />
-                          <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
+                          {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
+                          <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{carta.titulo}</p>
                           <p className='font-bold'>{carta.titulo}</p>
                           <p>{carta.descricao}</p>
                         </li>
                       ))}
                     </ul>
-                  ))}
-                </React.Fragment>
-              ))
-            ) :
-              (
-                <>
-                  <p>Secretaria: {secretariaSelecionada.nome}</p>
-                  <ul className='flex flex-col gap-2 mt-5'>
-                    {secretariaSelecionada.servicos.map((servico, indexServico) => (
-                      <>
-                        <ul className='list-none w-full flex flex-col gap-2  rounded-lg' key={indexServico}>
+                  </>
+                );
+
+              } else {
+                // Caso contrário, renderiza apenas a secretariaSelecionada
+                return (
+                  <>
+                    <p>Secretaria: {secretariaSelecionada.nome}</p>
+                    <ul className='flex flex-col gap-2 mt-5'>
+                      {secretariaSelecionada.servicos.map((servico, indexServico) => (
+                        <ul key={indexServico} className='list-none w-full flex flex-col gap-2  rounded-lg'>
                           {servico.cartas.map((carta, indexCarta) => (
-                            <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
-                              <img src={carta.avatar} alt="Avatar" className="w-10 h-10" />
+                            <li key={indexCarta} className='list-none w-full bg-white p-3 rounded-lg'>
+                              {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
                               <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
-                              <p>{carta.titulo}</p>
+                              <p className='font-bold'>{carta.titulo}</p>
                               <p>{carta.descricao}</p>
                             </li>
                           ))}
                         </ul>
-                      </>
-                    ))}
-                  </ul>
-                </>
-              )
+                      ))}
+                    </ul>
+                  </>
+                );
+              }
+            })()
           }
+
         </section>
       </main>
     </>
