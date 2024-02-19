@@ -5,9 +5,12 @@ import secretariasData from '../../public/secretarias.json'
 import Submenus from '@/components/Submenus';
 
 function ListaSecretarias({ state, handleSecretariaClick, secretariaSelecionada }) {
+  // Mapeamento de cores para tipos de secretarias
   const coresPorTipo = {
-    'Saúde': 'bg-red-500',
-    'Obras': 'bg-orange-500',
+    'Secretaria da Fazenda': 'bg-sky-500',
+    'Secretaria de Saúde': 'bg-red-600',
+    'Secretaria de Obras': 'bg-orange-500',
+    'Secretaria da Mulher': 'bg-pink-500',
     // Adicione mais tipos de secretarias e cores conforme necessário
   };
 
@@ -15,22 +18,27 @@ function ListaSecretarias({ state, handleSecretariaClick, secretariaSelecionada 
     <ul className={`${state ? 'visible opacity-100 h-[500px] top-20 overflow-auto' : 'invisible opacity-0 top-14 h-0 md:visible md:opacity-100 md:h-auto'} md:flex-row md:h-auto md:top-0 overflow-hidden transition-all ease-in-out duration-300 h-16 flex flex-col gap-1 items-end ml-20 absolute right-0`}>
 
       {/* LISTA DE SECRETARIAS */}
-      {secretariasData.secretarias.map((secretaria, index) => (
-        <li key={index} onClick={() => handleSecretariaClick(secretaria)} className={`px-4 ${secretariaSelecionada && secretariaSelecionada.nome === secretaria.nome ? 'bg-[#285497]' : 'bg-slate-400'} min-w-[56px] min-h-[56px] flex flex-row-reverse items-center justify-center rounded-lg shadow gap-3 cursor-pointer`}>
-          <div className="min-w-[32px] min-h-[32px] p-[2px] bg-[#5792EB] rounded-lg">
-            <Image
-              width={32}
-              height={32}
-              src="/SVG/icon-fazenda.svg"
-              alt="Icone fazenda"
-            />
-          </div>
-          <p className="font-bold text-white">{secretaria.nome}</p>
-        </li>
-      ))}
+      {secretariasData.secretarias.map((secretaria, index) => {
+        // Obtém a cor correspondente ao tipo de secretaria
+        const cor = coresPorTipo[secretaria.nome] || 'bg-slate-400';
+        return (
+          <li key={index} onClick={() => handleSecretariaClick(secretaria)} className={`px-4 ${secretariaSelecionada && secretariaSelecionada.nome === secretaria.nome ? cor : 'bg-slate-400'} min-w-[56px] min-h-[56px] flex flex-row-reverse items-center justify-center rounded-lg shadow gap-3 cursor-pointer`}>
+            <div className="min-w-[32px] min-h-[32px] p-[2px] bg-stone-100 opacity-50 rounded-lg">
+              <Image
+                width={32}
+                height={32}
+                src="/SVG/icon-fazenda.svg"
+                alt="Icone fazenda"
+              />
+            </div>
+            <p className="font-bold text-white">{secretaria.nome}</p>
+          </li>
+        );
+      })}
     </ul>
-  )
+  );
 }
+
 
 
 export default function Carta() {
