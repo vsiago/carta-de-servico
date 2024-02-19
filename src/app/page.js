@@ -4,13 +4,19 @@ import Image from "next/image"
 import secretariasData from '../../public/secretarias.json'
 import Submenus from '@/components/Submenus';
 
-function ListaSecretarias({ state, handleSecretariaClick }) {
+function ListaSecretarias({ state, handleSecretariaClick, secretariaSelecionada }) {
+  const coresPorTipo = {
+    'Saúde': 'bg-red-500',
+    'Obras': 'bg-orange-500',
+    // Adicione mais tipos de secretarias e cores conforme necessário
+  };
+
   return (
     <ul className={`${state ? 'visible opacity-100 h-[500px] top-20 overflow-auto' : 'invisible opacity-0 top-14 h-0 md:visible md:opacity-100 md:h-auto'} md:flex-row md:h-auto md:top-0 overflow-hidden transition-all ease-in-out duration-300 h-16 flex flex-col gap-1 items-end ml-20 absolute right-0`}>
 
       {/* LISTA DE SECRETARIAS */}
       {secretariasData.secretarias.map((secretaria, index) => (
-        <li key={index} onClick={() => handleSecretariaClick(secretaria)} className={`px-4 bg-[#285497] min-w-[56px] min-h-[56px] flex flex-row-reverse items-center justify-center rounded-lg shadow gap-3 cursor-pointer`}>
+        <li key={index} onClick={() => handleSecretariaClick(secretaria)} className={`px-4 ${secretariaSelecionada && secretariaSelecionada.nome === secretaria.nome ? 'bg-[#285497]' : 'bg-slate-400'} min-w-[56px] min-h-[56px] flex flex-row-reverse items-center justify-center rounded-lg shadow gap-3 cursor-pointer`}>
           <div className="min-w-[32px] min-h-[32px] p-[2px] bg-[#5792EB] rounded-lg">
             <Image
               width={32}
@@ -25,6 +31,7 @@ function ListaSecretarias({ state, handleSecretariaClick }) {
     </ul>
   )
 }
+
 
 export default function Carta() {
   const [state, setState] = useState(false);
@@ -91,7 +98,7 @@ export default function Carta() {
                 alt="Icone Carta de Servico"
               />
             </div>
-            <ListaSecretarias state={state} handleSecretariaClick={handleSecretariaClick} />
+            <ListaSecretarias state={state} handleSecretariaClick={handleSecretariaClick} secretariaSelecionada={secretariaSelecionada} />
             <div>
               <div
                 onClick={() => setState(!state)}
@@ -132,7 +139,7 @@ export default function Carta() {
                           <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
                             {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
                             <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
-                            <p className='font-bold'>{carta.titulo}</p>
+                            <p className='font-bold my-2'>{carta.titulo}</p>
                             <p>{carta.descricao}</p>
                           </li>
                         ))}
@@ -146,14 +153,18 @@ export default function Carta() {
                   <>
                     <p className='mt-6 uppercase text-sm font-semibold tracking-wide'>{cartaSelecionada.nome}</p>
                     <ul className='flex flex-col gap-2 mt-5'>
-                      {cartaSelecionada.cartas.map((carta, indexCarta) => (
-                        <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
-                          {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
-                          <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{carta.titulo}</p>
-                          <p className='font-bold'>{carta.titulo}</p>
-                          <p>{carta.descricao}</p>
-                        </li>
-                      ))}
+                      {
+                        secretariaSelecionada.servicos.map((servico, indexServico) => (
+                          cartaSelecionada.cartas.map((carta, indexCarta) => (
+                            <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
+                              {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
+                              <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
+                              <p className='font-bold my-2'>{carta.titulo}</p>
+                              <p>{carta.descricao}</p>
+                            </li>
+                          ))
+                        ))
+                      }
                     </ul>
                   </>
                 );
@@ -170,7 +181,7 @@ export default function Carta() {
                             <li key={indexCarta} className='list-none w-full bg-white p-3 rounded-lg'>
                               {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
                               <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
-                              <p className='font-bold'>{carta.titulo}</p>
+                              <p className='font-bold my-2'>{carta.titulo}</p>
                               <p>{carta.descricao}</p>
                             </li>
                           ))}
