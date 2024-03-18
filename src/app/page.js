@@ -102,7 +102,7 @@ export default function Carta() {
             alt="Icone Carta de Servico"
           />
           <Image
-            width={122.7}
+            width={145.7}
             height={41.92}
             src="/images/logo-itaguai.png"
             alt="Logo de Itaguai"
