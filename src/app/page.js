@@ -142,11 +142,15 @@ export default function Carta() {
                     {secretaria.servicos.map((servico, indexServico) => (
                       <ul className='grid md:grid-cols-2 gap-2 mt-2 ' key={indexServico}>
                         {servico.cartas.map((carta, indexCarta) => (
-                          <li className='list-none w-full bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150' style={{ gridColumnEnd: 'span 1' }} key={indexCarta}>
-                            {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
+                          <li className='relative list-none w-full pb-24 pt-16 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150' style={{ gridColumnEnd: 'span 1' }} key={indexCarta}>
+                            <img src={carta.avatar} alt="Avatar" className="w-32 h-32 absolute right-10" />
                             <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
                             <p className='font-bold my-2'>{carta.titulo}</p>
                             <p>{carta.descricao}</p>
+                            <div className='absolute bottom-5 right-5 flex items-center justify-center gap-2 font-bold border rounded-md py-1 px-4'>
+                          <p>BAIXAR PDF</p>
+                              <Image src={require('../../public/images/icon-pdf.png')} alt="Ícone PDF" className="w-12 text-end " />
+                            </div>
                           </li>
                         ))}
                       </ul>
@@ -158,11 +162,11 @@ export default function Carta() {
                 return (
                   <>
                     <p className='mt-6 uppercase text-sm font-semibold tracking-wide'>{cartaSelecionada.nome}</p>
-                    <ul className='flex flex-col gap-2 mt-5'>
+                    <ul className='grid md:grid-cols-2 gap-2 mt-5'>
                       {
                         secretariaSelecionada.servicos.map((servico, indexServico) => (
                           cartaSelecionada.cartas.map((carta, indexCarta) => (
-                            <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
+                            <li className='list-none w-full bg-white p-5 rounded-lg' key={indexCarta}>
                               {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
                               <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
                               <p className='font-bold my-2'>{carta.titulo}</p>
