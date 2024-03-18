@@ -39,8 +39,6 @@ function ListaSecretarias({ state, handleSecretariaClick, secretariaSelecionada 
   );
 }
 
-
-
 export default function Carta() {
   const [state, setState] = useState(false);
   const [secretarias, setSecretarias] = useState([]);
@@ -48,15 +46,15 @@ export default function Carta() {
   const [cartaSelecionada, setCartaSelecionada] = useState(null);
   const [servicos, setServicos] = useState([]);
 
-  // Seleciona secretaria especifica
-  const handleSecretariaClick = (secretaria = null) => {
-    setSecretariaSelecionada(secretaria);
-    setCartaSelecionada(null);
-  };
-
   // Seleciona a carta especifica
   const handleCartaClick = (carta = null) => {
     setCartaSelecionada(carta);
+  };
+
+  // Seleciona secretaria especifica
+  const handleSecretariaClick = (secretaria = null) => {
+    setSecretariaSelecionada(secretaria);
+    setCartaSelecionada(null); // Redefine a carta selecionada ao selecionar uma nova secretaria
   };
 
   useEffect(() => {
@@ -122,10 +120,10 @@ export default function Carta() {
           {secretariaSelecionada && (
             <div className='overflow-x-auto'>
               <ul className='flex gap-2 mt-3 z-[1000] whitespace-nowrap h-16 items-center'>
-                <p className={`p-1 px-3 rounded-full cursor-pointer h-8 ${!cartaSelecionada ? 'bg-slate-600 text-white' : 'bg-slate-300 text-black'}`} onClick={() => handleCartaClick(null)}>Todos de {secretariaSelecionada.nome}</p>
+                <p className={`p-1 px-3 rounded-full cursor-pointer h-8 ${!cartaSelecionada ? 'bg-slate-600 text-white' : 'bg-slate-300 text-slate-700'}`} onClick={() => handleCartaClick(null)}>Todos de {secretariaSelecionada.nome}</p>
                 {servicos.map((servico, index) => (
                   <li onClick={() => handleCartaClick(servico)} key={index}>
-                    <p className={`p-1 px-3 rounded-full cursor-pointer h-8 ${cartaSelecionada === servico ? 'bg-slate-600 text-white' : 'bg-slate-300 text-black'}`}>{servico.nome}</p>
+                    <p className={`p-1 px-3 rounded-full cursor-pointer h-8 ${cartaSelecionada === servico ? 'bg-slate-600 text-white' : 'bg-slate-300 text-slate-700'}`}>{servico.nome}</p>
                   </li>
                 ))}
               </ul>
@@ -142,9 +140,9 @@ export default function Carta() {
                   <React.Fragment key={indexSecretaria}>
                     <p className='mb-4 mt-8 uppercase text-sm font-semibold tracking-wide'>{secretaria.nome}</p>
                     {secretaria.servicos.map((servico, indexServico) => (
-                      <ul className='flex flex-col gap-2 mt-2' key={indexServico}>
+                      <ul className='grid grid-cols-2 gap-2 mt-2 ' key={indexServico}>
                         {servico.cartas.map((carta, indexCarta) => (
-                          <li className='list-none w-full bg-white p-3 rounded-lg' key={indexCarta}>
+                          <li className='list-none w-full bg-white p-3 rounded-lg' style={{ gridColumnEnd: 'span 1' }} key={indexCarta}>
                             {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
                             <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
                             <p className='font-bold my-2'>{carta.titulo}</p>
@@ -184,7 +182,7 @@ export default function Carta() {
                     <p className='mt-6 uppercase text-sm font-semibold tracking-wide'>{secretariaSelecionada.nome}</p>
                     <ul className='flex flex-col gap-2 mt-5'>
                       {secretariaSelecionada.servicos.map((servico, indexServico) => (
-                        <ul key={indexServico} className='list-none w-full flex flex-col gap-2  rounded-lg'>
+                        <ul key={indexServico} className='list-none w-full grid grid-cols-2 flex-col gap-2  rounded-lg'>
                           {servico.cartas.map((carta, indexCarta) => (
                             <li key={indexCarta} className='list-none w-full bg-white p-3 rounded-lg'>
                               {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
