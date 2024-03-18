@@ -27,7 +27,7 @@ function ListaSecretarias({ state, handleSecretariaClick, secretariaSelecionada 
               <Image
                 width={32}
                 height={32}
-                src="/SVG/icon-fazenda.svg"
+                src={secretariaSelecionada && secretariaSelecionada.nome === secretaria.nome ? secretaria.iconeAtivo : secretaria.iconeInativo}
                 alt="Icone fazenda"
               />
             </div>
