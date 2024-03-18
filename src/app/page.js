@@ -140,7 +140,7 @@ export default function Carta() {
                   <React.Fragment key={indexSecretaria}>
                     <p className='mb-4 mt-8 uppercase text-sm font-semibold tracking-wide'>{secretaria.nome}</p>
                     {secretaria.servicos.map((servico, indexServico) => (
-                      <ul className='grid grid-cols-2 gap-2 mt-2 ' key={indexServico}>
+                      <ul className='grid md:grid-cols-2 gap-2 mt-2 ' key={indexServico}>
                         {servico.cartas.map((carta, indexCarta) => (
                           <li className='list-none w-full bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150' style={{ gridColumnEnd: 'span 1' }} key={indexCarta}>
                             {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
@@ -182,7 +182,7 @@ export default function Carta() {
                     <p className='mt-6 uppercase text-sm font-semibold tracking-wide'>{secretariaSelecionada.nome}</p>
                     <ul className='flex flex-col gap-2 mt-5'>
                       {secretariaSelecionada.servicos.map((servico, indexServico) => (
-                        <ul key={indexServico} className='list-none w-full grid grid-cols-2 flex-col gap-2  rounded-lg'>
+                        <ul key={indexServico} className='list-none w-full grid md:grid-cols-2 flex-col gap-2  rounded-lg'>
                           {servico.cartas.map((carta, indexCarta) => (
                             <li key={indexCarta} className='list-none w-full bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150'>
                               {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
