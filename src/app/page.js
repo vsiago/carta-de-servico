@@ -240,10 +240,11 @@ export default function Carta() {
                     {secretariaSelecionada.servicos.map(
                       (servico, indexServico) =>
                         cartaSelecionada.cartas.map((carta, indexCarta) => (
-                          <a  href={carta.link}>
-                            <li
-                              className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
-                            >
+                          <li
+                            className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
+                            key={indexCarta}
+                          >
+                            <a href={carta.link}>
                               <Image
                                 src={carta.avatar}
                                 alt="Avatar"
@@ -265,8 +266,8 @@ export default function Carta() {
                                   className="w-12 text-end "
                                 />
                               </div>
-                            </li>
-                          </a>
+                            </a>
+                          </li>
                         ))
                     )}
                   </ul>
@@ -287,11 +288,11 @@ export default function Carta() {
                           className="list-none w-full grid md:grid-cols-2 flex-col gap-2  rounded-lg"
                         >
                           {servico.cartas.map((carta, indexCarta) => (
-                            <a key={indexCarta} href={carta.link}>
-                              <li
-                                
-                                className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
-                              >
+                            <li
+                              key={indexCarta}
+                              className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
+                            >
+                              <a href={carta.link}>
                                 <Image
                                   src={carta.avatar}
                                   width={50}
@@ -313,8 +314,8 @@ export default function Carta() {
                                     className="w-12 text-end "
                                   />
                                 </div>
-                              </li>
-                            </a>
+                              </a>
+                            </li>
                           ))}
                         </ul>
                       )
