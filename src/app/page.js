@@ -240,10 +240,9 @@ export default function Carta() {
                     {secretariaSelecionada.servicos.map(
                       (servico, indexServico) =>
                         cartaSelecionada.cartas.map((carta, indexCarta) => (
-                          <a href={carta.link}>
+                          <a  href={carta.link}>
                             <li
                               className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
-                              key={indexCarta}
                             >
                               <Image
                                 src={carta.avatar}
@@ -288,9 +287,9 @@ export default function Carta() {
                           className="list-none w-full grid md:grid-cols-2 flex-col gap-2  rounded-lg"
                         >
                           {servico.cartas.map((carta, indexCarta) => (
-                            <a href={carta.link}>
+                            <a key={indexCarta} href={carta.link}>
                               <li
-                                key={indexCarta}
+                                
                                 className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
                               >
                                 <Image
