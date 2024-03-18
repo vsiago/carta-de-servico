@@ -142,7 +142,7 @@ export default function Carta() {
                     {secretaria.servicos.map((servico, indexServico) => (
                       <ul className='grid grid-cols-2 gap-2 mt-2 ' key={indexServico}>
                         {servico.cartas.map((carta, indexCarta) => (
-                          <li className='list-none w-full bg-white p-3 rounded-lg' style={{ gridColumnEnd: 'span 1' }} key={indexCarta}>
+                          <li className='list-none w-full bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150' style={{ gridColumnEnd: 'span 1' }} key={indexCarta}>
                             {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
                             <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
                             <p className='font-bold my-2'>{carta.titulo}</p>
@@ -184,7 +184,7 @@ export default function Carta() {
                       {secretariaSelecionada.servicos.map((servico, indexServico) => (
                         <ul key={indexServico} className='list-none w-full grid grid-cols-2 flex-col gap-2  rounded-lg'>
                           {servico.cartas.map((carta, indexCarta) => (
-                            <li key={indexCarta} className='list-none w-full bg-white p-3 rounded-lg'>
+                            <li key={indexCarta} className='list-none w-full bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150'>
                               {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
                               <p className='p-1 px-3 bg-slate-300 w-fit rounded-full'>{servico.nome}</p>
                               <p className='font-bold my-2'>{carta.titulo}</p>
