@@ -22,8 +22,8 @@ function ListaSecretarias({
     <ul
       className={`${
         state
-          ? "visible opacity-100 h-[500px] top-20 overflow-auto"
-          : "invisible opacity-0 top-14 h-0 md:visible md:opacity-100 md:h-auto"
+          ? "visible opacity-100 h-[500px] top-20 overflow-auto z-[5000]"
+          : "invisible opacity-0 top-14 h-0 md:visible md:opacity-100 md:h-auto z-[5000]"
       } md:flex-row md:h-auto md:top-0 overflow-hidden transition-all ease-in-out duration-300 h-16 flex flex-col gap-1 items-end ml-20 absolute right-0`}
     >
       {/* LISTA DE SECRETARIAS */}
@@ -34,12 +34,12 @@ function ListaSecretarias({
           <li
             key={index}
             onClick={() => handleSecretariaClick(secretaria)}
-            className={`px-4 ${
+            className={`px-4 z-[5000] ${
               secretariaSelecionada &&
               secretariaSelecionada.nome === secretaria.nome
                 ? cor
-                : "bg-slate-400"
-            } min-w-[56px] min-h-[56px] flex flex-row-reverse items-center justify-center rounded-lg shadow gap-3 cursor-pointer`}
+                : "bg-slate-400 z-[5000]"
+            } min-w-[56px] min-h-[56px] flex flex-row-reverse items-center justify-center rounded-lg shadow gap-3 cursor-pointer z-[5000]`}
           >
             <div className="min-w-[32px] min-h-[32px] p-[2px] bg-stone-100 opacity-50 rounded-lg">
               <Image
@@ -197,22 +197,21 @@ export default function Carta() {
                       >
                         {servico.cartas.map((carta, indexCarta) => (
                           <li
-                            className="relative list-none w-full pb-24 pt-16 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
-                            style={{ gridColumnEnd: "span 1" }}
+                            className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
                             key={indexCarta}
                           >
                             <a href={carta.link}>
                               <img
                                 src={carta.avatar}
                                 alt="Avatar"
-                                className="w-32 h-32 absolute right-10"
+                                className="w-24 h-24 absolute object-cover rounded-full top-5 right-10"
                               />
                               <p className="p-1 px-3 bg-slate-300 w-fit rounded-full">
                                 {servico.nome}
                               </p>
                               <p className="font-bold my-2">{carta.titulo}</p>
-                              <p>{carta.descricao}</p>
-                              <div className="absolute bottom-5 right-5 flex items-center justify-center gap-2 font-bold border rounded-md py-1 px-4">
+                              <p className="line-clamp-4">{carta.descricao}</p>
+                              <div className="xl:absolute mt-10 xl:mt-0 bottom-5 xl:right-5 flex w-full xl:w-auto mx-auto xl:mx-5 items-center justify-center gap-2 font-bold border rounded-md py-1 px-4">
                                 <p>BAIXAR PDF</p>
                                 <Image
                                   src={require("../../public/images/icon-pdf.png")}
@@ -239,17 +238,32 @@ export default function Carta() {
                     {secretariaSelecionada.servicos.map(
                       (servico, indexServico) =>
                         cartaSelecionada.cartas.map((carta, indexCarta) => (
-                          <li
-                            className="list-none w-full bg-white p-5 rounded-lg"
-                            key={indexCarta}
-                          >
-                            {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
-                            <p className="p-1 px-3 bg-slate-300 w-fit rounded-full">
-                              {servico.nome}
-                            </p>
-                            <p className="font-bold my-2">{carta.titulo}</p>
-                            <p>{carta.descricao}</p>
-                          </li>
+                          <a href={carta.link}>
+                            <li
+                              className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
+                              key={indexCarta}
+                            >
+                              <img
+                                src={carta.avatar}
+                                alt="Avatar"
+                                className="w-24 h-24 absolute object-cover rounded-full top-5 right-10"
+                              />
+                              {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
+                              <p className="p-1 px-3 bg-slate-300 w-fit rounded-full">
+                                {servico.nome}
+                              </p>
+                              <p className="font-bold my-2">{carta.titulo}</p>
+                              <p>{carta.descricao}</p>
+                              <div className="xl:absolute mt-10 xl:mt-0 bottom-5 xl:right-5 flex w-full xl:w-auto mx-auto xl:mx-5 items-center justify-center gap-2 font-bold border rounded-md py-1 px-4">
+                                <p>BAIXAR PDF</p>
+                                <Image
+                                  src={require("../../public/images/icon-pdf.png")}
+                                  alt="Ícone PDF"
+                                  className="w-12 text-end "
+                                />
+                              </div>
+                            </li>
+                          </a>
                         ))
                     )}
                   </ul>
@@ -270,17 +284,32 @@ export default function Carta() {
                           className="list-none w-full grid md:grid-cols-2 flex-col gap-2  rounded-lg"
                         >
                           {servico.cartas.map((carta, indexCarta) => (
-                            <li
-                              key={indexCarta}
-                              className="list-none w-full bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
-                            >
-                              {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
-                              <p className="p-1 px-3 bg-slate-300 w-fit rounded-full">
-                                {servico.nome}
-                              </p>
-                              <p className="font-bold my-2">{carta.titulo}</p>
-                              <p>{carta.descricao}</p>
-                            </li>
+                            <a href={carta.link}>
+                              <li
+                                key={indexCarta}
+                                className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
+                              >
+                                <img
+                                  src={carta.avatar}
+                                  alt="Avatar"
+                                  className="w-24 h-24 absolute object-cover rounded-full top-5 right-10"
+                                />
+                                {/* <img src={carta.avatar} alt="Avatar" className="w-10 h-10" /> */}
+                                <p className="p-1 px-3 bg-slate-300 w-fit rounded-full">
+                                  {servico.nome}
+                                </p>
+                                <p className="font-bold my-2">{carta.titulo}</p>
+                                <p>{carta.descricao}</p>
+                                <div className="xl:absolute mt-10 xl:mt-0 bottom-5 xl:right-5 flex w-full xl:w-auto mx-auto xl:mx-5 items-center justify-center gap-2 font-bold border rounded-md py-1 px-4">
+                                  <p>BAIXAR PDF</p>
+                                  <Image
+                                    src={require("../../public/images/icon-pdf.png")}
+                                    alt="Ícone PDF"
+                                    className="w-12 text-end "
+                                  />
+                                </div>
+                              </li>
+                            </a>
                           ))}
                         </ul>
                       )
