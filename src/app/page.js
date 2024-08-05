@@ -93,21 +93,8 @@ export default function Carta() {
 
   return (
     <>
-      <header className="min-h-40 bg-[#003E75] px-6 flex flex-col justify-end py-6">
-        <div className="flex justify-between items-center container mx-auto">
-          <Image
-            width={42}
-            height={42}
-            src="/SVG/icon-carta-de-servico.svg"
-            alt="Icone Carta de Servico"
-          />
-          <Image
-            width={145.7}
-            height={41.92}
-            src="/images/logo-itaguai.png"
-            alt="Logo de Itaguai"
-          />
-        </div>
+      <header className=" bg-[#003E75] px-6 flex flex-col justify-end pb-6">
+        
         <div className="container mx-auto">
           <p className="text-2xl font-medium text-white pt-6">
             Carta de Serviço
@@ -117,6 +104,8 @@ export default function Carta() {
           </p>
         </div>
       </header>
+
+      
       <main className="min-h-screen flex-1 bg-[#E3E6EE] p-6 ">
         <section className="container mx-auto">
           <nav className="flex gap-3 items-center justify-between min-w-screen  relative">
