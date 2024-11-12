@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import secretariasData from "../../public/secretarias.json";
 import Submenus from "@/components/Submenus";
+import Link from "next/link";
 
 function ListaSecretarias({
   state,
@@ -43,8 +44,8 @@ function ListaSecretarias({
           >
             <div className="min-w-[32px] min-h-[32px] p-[2px] bg-stone-100 opacity-50 rounded-lg">
               <Image
-                width={32}
-                height={32}
+                width={45}
+                height={45}
                 src={
                   secretariaSelecionada &&
                   secretariaSelecionada.nome === secretaria.nome
@@ -126,8 +127,8 @@ export default function Carta() {
               className="p-2 bg-[#233550] min-w-[56px] h-[56px] flex items-center justify-center rounded-lg cursor-pointer"
             >
               <Image
-                width={32}
-                height={32}
+                width={45}
+                height={45}
                 src="/SVG/icon-home.svg"
                 alt="Icone Carta de Servico"
               />
@@ -197,13 +198,13 @@ export default function Carta() {
                       >
                         {servico.cartas.map((carta, indexCarta) => (
                           <li
-                            className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg cursor-pointer hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
+                            className="relative list-none w-full xl:pb-28 pt-24 bg-slate-50 p-5 rounded-lg  hover:bg-white hover:drop-shadow-xl transition-all ease-in duration-150"
                             key={indexCarta}
                           >
-                            <a href={carta.link}>
+                            <div>
                               <Image
-                                width={50}
-                                height={50}
+                                width={150}
+                                height={150}
                                 src={carta.avatar}
                                 alt="Avatar"
                                 className="w-24 h-24 absolute object-cover rounded-full top-5 right-10"
@@ -213,15 +214,17 @@ export default function Carta() {
                               </p>
                               <p className="font-bold my-2">{carta.titulo}</p>
                               <p className="line-clamp-4">{carta.descricao}</p>
-                              <div className="xl:absolute mt-10 xl:mt-0 bottom-5 xl:right-5 flex w-full xl:w-auto mx-auto xl:mx-5 items-center justify-center gap-2 font-bold border rounded-md py-1 px-4">
+                              <Link href={carta.link} className="xl:absolute mt-10 xl:mt-0 bottom-5 xl:right-5 hover:bg-slate-500/10 flex w-full transition-all duration-150 ease-in-out xl:w-auto mx-auto xl:mx-5 items-center justify-center gap-2 font-bold border rounded-md py-1 px-4">
                                 <p>BAIXAR PDF</p>
                                 <Image
                                   src={require("../../public/images/icon-pdf.png")}
                                   alt="Ícone PDF"
-                                  className="w-12 text-end "
+                                  className="w-10 p-1 text-end "
+                                  width={150}
+                                  height={150}
                                 />
-                              </div>
-                            </a>
+                              </Link>
+                            </div>
                           </li>
                         ))}
                       </ul>
@@ -247,6 +250,8 @@ export default function Carta() {
                             <a href={carta.link}>
                               <Image
                                 src={carta.avatar}
+                                width={150}
+                                height={150}
                                 alt="Avatar"
                                 className="w-24 h-24 absolute object-cover rounded-full top-5 right-10"
                               />
@@ -259,8 +264,8 @@ export default function Carta() {
                               <div className="xl:absolute mt-10 xl:mt-0 bottom-5 xl:right-5 flex w-full xl:w-auto mx-auto xl:mx-5 items-center justify-center gap-2 font-bold border rounded-md py-1 px-4">
                                 <p>BAIXAR PDF</p>
                                 <Image
-                                  width={50}
-                                  height={50}
+                                  width={150}
+                                  height={150}
                                   src={require("../../public/images/icon-pdf.png")}
                                   alt="Ícone PDF"
                                   className="w-12 text-end "
@@ -295,8 +300,8 @@ export default function Carta() {
                               <a href={carta.link}>
                                 <Image
                                   src={carta.avatar}
-                                  width={50}
-                                  height={50}
+                                  width={150}
+                                  height={150}
                                   alt="Avatar"
                                   className="w-24 h-24 absolute object-cover rounded-full top-5 right-10"
                                 />
